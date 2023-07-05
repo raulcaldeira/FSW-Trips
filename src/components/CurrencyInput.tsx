@@ -13,7 +13,7 @@ function CurrencyInput({ className, error, errorMessage, ...props }: InputProps)
     error ? "border-red-500" : "",
     className
   );
-
+  
   return (
     <div className="flex w-full flex-col">
       <_CurrencyInput
