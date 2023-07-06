@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 
 interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
-  variant: "primary" | "outlined"
+  variant?: "primary" | "outlined"
 }
 
 
