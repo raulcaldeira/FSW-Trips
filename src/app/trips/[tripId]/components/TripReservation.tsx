@@ -8,7 +8,9 @@ import { Trip } from "@prisma/client";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
-    trip: Trip;
+    tripStartDate: Date;
+    tripEndDate: Date;
+    maxGuests: number;
 }
 
 interface TripReservationForm {
@@ -17,13 +19,15 @@ interface TripReservationForm {
     endDate: Date | null;
 }
 
-const TripReservation = ({trip}: TripReservationProps) => {
+const TripReservation = ({ tripStartDate, tripEndDate, maxGuests}: TripReservationProps) => {
 
-    const { register, handleSubmit, formState: { errors}, control } = useForm<TripReservationForm>()
+    const { register, handleSubmit, formState: { errors}, control, watch } = useForm<TripReservationForm>()
 
     const onSubmit = (data: any) => {
         console.log(data)
     }
+
+    const startDate = watch("startDate")
 
     return(
         <div className="flex flex-col px-5">
@@ -46,6 +50,7 @@ const TripReservation = ({trip}: TripReservationProps) => {
                             selected={field.value} 
                             placeholderText="Data de Início" 
                             className="w-full"
+                            minDate={tripStartDate}
                         />
                     )}
                 />
@@ -67,6 +72,8 @@ const TripReservation = ({trip}: TripReservationProps) => {
                             selected={field.value} 
                             placeholderText="Data final" 
                             className="w-full"
+                            maxDate={tripEndDate}
+                            minDate={startDate ?? tripStartDate}
                         />
                     )}
                 />
@@ -74,7 +81,7 @@ const TripReservation = ({trip}: TripReservationProps) => {
 
             </div>
 
-            <Input {...register("guests", {required: {value:true, message: "O número de hóspeder é obrigatório."}})} error={!!errors?.guests} errorMessage={errors?.guests?.message} placeholder={`Número de hóspedes (máx: ${trip.maxGuests.toString()})`} className="mt-4" />
+            <Input {...register("guests", {required: {value:true, message: "O número de hóspeder é obrigatório."}})} error={!!errors?.guests} errorMessage={errors?.guests?.message} placeholder={`Número de hóspedes (máx: ${maxGuests.toString()})`} className="mt-4" />
 
             <div className="flex justify-between mt-3">
                 <p className="font-medium text-sm text-primaryDarker">Total: </p>
