@@ -6,6 +6,7 @@ import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
 import { Trip } from "@prisma/client";
 import { differenceInDays } from "date-fns";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
@@ -25,6 +26,8 @@ interface TripReservationForm {
 const TripReservation = ({ tripId, tripStartDate, tripEndDate, maxGuests, pricePerDay}: TripReservationProps) => {
 
     const { register, handleSubmit, formState: { errors}, control, watch, setError } = useForm<TripReservationForm>()
+
+    const router = useRouter()
 
     const onSubmit = async (data: TripReservationForm) => {
         const response = await fetch("http://localhost:3000/api/trips/check", {
@@ -53,7 +56,7 @@ const TripReservation = ({ tripId, tripStartDate, tripEndDate, maxGuests, priceP
         }
 
         if(res?.error?.code === "INVALID_START_DATE"){
-            setError("startDate", {
+            return setError("startDate", {
                 type: "manual",
                 message: "Data inválida.",
             })
@@ -66,6 +69,7 @@ const TripReservation = ({ tripId, tripStartDate, tripEndDate, maxGuests, priceP
             })
         }
 
+        router.push(`/trips/${tripId}/confirmation?startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&guests=${data.guests}`);
 
     };
 
@@ -125,7 +129,7 @@ const TripReservation = ({ tripId, tripStartDate, tripEndDate, maxGuests, priceP
 
             </div>
 
-            <Input type="number" {...register("guests", {required: {value:true, message: "O número de hóspeder é obrigatório."}, max:{value: maxGuests, message: `Número de hóspedes não pode ser maior que ${maxGuests}`}})} error={!!errors?.guests} errorMessage={errors?.guests?.message} placeholder={`Número de hóspedes (máx: ${maxGuests.toString()})`} className="mt-4" />
+            <Input min={1} type="number" {...register("guests", {required: {value:true, message: "O número de hóspeder é obrigatório."}, max:{value: maxGuests, message: `Número de hóspedes não pode ser maior que ${maxGuests}`}, min:{value:1, message: "Número de hóspedes não pode ser inferior a 1"}})} error={!!errors?.guests} errorMessage={errors?.guests?.message} placeholder={`Número de hóspedes (máx: ${maxGuests.toString()})`} className="mt-4" />
 
             <div className="flex justify-between mt-3">
                 <p className="font-medium text-sm text-primaryDarker">Total: </p>
