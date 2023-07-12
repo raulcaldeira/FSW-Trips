@@ -18,6 +18,10 @@ const Header = () => {
         signOut() 
     }
 
+    const handleMyTripsClick = () =>{
+        
+    }
+
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen)
 
     return (
@@ -39,8 +43,15 @@ const Header = () => {
                     <Image src={data.user.image!} width={35} height={35} alt={data.user.name!} className="rounded-full shadow-md"/>
 
                     {menuIsOpen && (
-                        <div className="z-50 absolute top-12 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center">
-                            <button className="text-primary text-sm font-semibold cursor-pointer" onClick={handleLogoutClick}>
+                        <div className="z-50 absolute top-14 left-0 w-full h-[100px] bg-white rounded-lg shadow-md flex flex-col justify-center items-center">
+
+                            <Link href="/my-trips">
+                                <button className="pb-2 border-b border-grayLighter border-solid text-primary text-sm font-semibold cursor-pointer">
+                                    Reservas
+                                </button>
+                            </Link>
+                            
+                            <button className="pt-2 text-primary text-sm font-semibold cursor-pointer" onClick={handleLogoutClick}>
                                 Logout
                             </button>
                         </div>
