@@ -8,7 +8,6 @@ import ptBR from 'date-fns/locale/pt-BR'
 import ReactCountryFlag from "react-country-flag"
 import { useSession } from "next-auth/react"
 import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css' ;   
 
 import { Trip } from "@prisma/client"
 
