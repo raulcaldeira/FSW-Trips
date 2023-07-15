@@ -10,7 +10,7 @@ const QuickSearch = () => {
                 <div className="w-full h-[1px] bg-grayLighter"></div>
             </div>
 
-            <div className="flex w-full justify-around mt-5">
+            <div className="flex w-full justify-around mt-5 lg:mt-10 lg:justify-center lg:gap-40">
 
                 <Link href={"/trips/search?text=hotel"} className="flex flex-col items-center gap-1">
                     <Image width={35} height={35} src="/hotel-icon.png" alt="Hotel" />
