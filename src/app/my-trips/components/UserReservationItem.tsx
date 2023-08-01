@@ -5,33 +5,21 @@ import ReactCountryFlag from "react-country-flag";
 import { format } from "date-fns"
 import ptBR from 'date-fns/locale/pt-BR'
 import Button from "@/components/Button";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
 
 
 interface UserReservationItemProps {
     reservation: Prisma.TripReservationGetPayload<{include: {trip: true}}>;
-    fetchReservations: () => void
+    cancelReservation: (id: string) => void
 }
 
-const UserReservationItem = ({reservation, fetchReservations}: UserReservationItemProps) => {
-
-    const router = useRouter()
+const UserReservationItem = ({reservation, cancelReservation}: UserReservationItemProps) => {
 
     const {trip} = reservation
 
-    const handleDeleteClick = async ()=>{
-        const response = await fetch(`/api/trips/reservation/${reservation.id}`, {
-            method: "DELETE",
-        })
-
-        if(!response.ok){
-            return toast.error("Ocorreu um erro ao cancelar a reserva!");
-        }
-
-        toast.success("Reserva cancelada com sucesso!", {position: "bottom-center"});
-
-        fetchReservations()
+    const handleCancelClick = () => {
+        cancelReservation(reservation.id)
     }
 
     return(
@@ -72,7 +60,13 @@ const UserReservationItem = ({reservation, fetchReservations}: UserReservationIt
                         <p className="font-medium text-sm">R${Number(reservation.totalPaid)}</p>
                     </div>
 
-                    <Button variant="danger" className="mt-5" onClick={handleDeleteClick}> Cancelar </Button>
+                    {/* <Button variant="danger" className="mt-5" onClick={handleDeleteClick}> Cancelar </Button> */}
+
+                    <AlertDialog.Trigger asChild>
+                        <Button variant="danger" className="mt-5" onClick={handleCancelClick}> Cancelar </Button>
+                    </AlertDialog.Trigger>
+
+                    
 
                 </div>
             </div>
