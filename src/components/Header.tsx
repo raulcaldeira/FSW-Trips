@@ -10,6 +10,7 @@ const Header = () => {
 
     const [menuIsOpen, setMenuIsOpen] = React.useState(false)
     const {status, data} = useSession()
+    
 
     const handleLoginClick = () => signIn()
 
@@ -25,7 +26,7 @@ const Header = () => {
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen)
 
     return (
-        <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center lg:border-b lg:border-grayLighter">
+        <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center lg:border-b lg:border-grayLighter fixed top-0 bg-white z-30">
             <Link href={'/'}>
                 <div className="relative h-[32px] w-[182px]">
                     <Image width={183} height={32} src={"/logo.png"} alt="Full Stack Week" />
