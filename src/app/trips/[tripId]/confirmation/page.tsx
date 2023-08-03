@@ -121,7 +121,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
       </div>
 
       <div className="flex flex-col mt-5 text-primaryDarker">
-        <h3 className="font-semibold">
+        <h3 className="font-semibold flex items-center gap-1">
           <AiOutlineCalendar size={16} className="text-primary"/>
           Data
         </h3>
@@ -131,7 +131,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
           <p>{format(endDate, "dd 'de' MMMM", { locale: ptBR })}</p>
         </div>
 
-        <h3 className="font-semibold mt-5">
+        <h3 className="font-semibold mt-5 flex items-center gap-1">
           <BsPeople size={16} className="text-primary"/>
           Hóspedes
         </h3>
