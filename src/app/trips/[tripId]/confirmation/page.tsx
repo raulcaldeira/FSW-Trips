@@ -15,6 +15,9 @@ import { Trip } from "@prisma/client";
 import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
 
+import { AiOutlineCalendar } from "react-icons/ai"
+import { BsPeople } from "react-icons/bs"
+
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -113,19 +116,25 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
         <div className="flex justify-between mt-1">
           <p className="text-primaryDarker">Total:</p>
-          <p className="font-medium">R${totalPrice}</p>
+          <p className="font-semibold text-primary ">R${totalPrice}</p>
         </div>
       </div>
 
       <div className="flex flex-col mt-5 text-primaryDarker">
-        <h3 className="font-semibold">Data</h3>
+        <h3 className="font-semibold">
+          <AiOutlineCalendar size={16} className="text-primary"/>
+          Data
+        </h3>
         <div className="flex items-center gap-1 mt-1">
           <p>{format(startDate, "dd 'de' MMMM", { locale: ptBR })}</p>
           {" - "}
           <p>{format(endDate, "dd 'de' MMMM", { locale: ptBR })}</p>
         </div>
 
-        <h3 className="font-semibold mt-5">Hóspedes</h3>
+        <h3 className="font-semibold mt-5">
+          <BsPeople size={16} className="text-primary"/>
+          Hóspedes
+        </h3>
         <p>{guests} hóspedes</p>
 
         <Button className="mt-5" onClick={handleBuyClick}>
