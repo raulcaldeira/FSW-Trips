@@ -8,6 +8,10 @@ import Button from "@/components/Button";
 
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 
+import { AiOutlineCalendar } from "react-icons/ai"
+import { BsPeople } from "react-icons/bs"
+
+
 
 interface UserReservationItemProps {
     reservation: Prisma.TripReservationGetPayload<{include: {trip: true}}>;
@@ -42,7 +46,10 @@ const UserReservationItem = ({reservation, cancelReservation}: UserReservationIt
                 </div>
 
                 <div className="flex flex-col mt-5 text-primaryDarker">
-                    <h3 className="text-sm">Data</h3>
+                    <h3 className="text-sm flex items-center gap-1">
+                        <AiOutlineCalendar size={16} className="text-primary"/>
+                        Data
+                    </h3>
                     <div className="flex items-center gap-1">
                         <p className="text-sm">{format(new Date(reservation.startDate), "dd 'de' MMMM ", {locale: ptBR})}</p>
                         {" - "}
@@ -50,12 +57,15 @@ const UserReservationItem = ({reservation, cancelReservation}: UserReservationIt
                     </div>
 
 
-                    <h3 className="mt-5 text-sm">Hóspedes</h3>
+                    <h3 className="mt-5 text-sm flex items-center gap-1">
+                        <BsPeople size={16} className="text-primary"/>
+                        Hóspedes
+                    </h3>
                     <p className="text-sm pb-3">{`${reservation.guests} hóspede${Number(reservation.guests) > 1 ? 's' : ''}`}</p>
 
                     <h1 className="font-semibold text-primaryDarker mt-3 pt-5 border-t border-solid border-grayLighter">Informações sobre o preço</h1>
 
-                    <div className="flex justify-between mt-1">
+                    <div className="flex justify-between items-center mt-1">
                         <p className="text-primaryDarker text-sm mt-2">Total:</p>
                         <p className="font-medium text-sm">R${Number(reservation.totalPaid)}</p>
                     </div>

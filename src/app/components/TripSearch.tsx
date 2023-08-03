@@ -8,6 +8,11 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 
+
+import { motion } from 'framer-motion'
+import { fadeIn } from '@/animation/variants'
+
+
 interface TripSearchForm {
   text: string;
   startDate: Date | null;
@@ -30,11 +35,23 @@ const TripSearch = () => {
 
   return (
     <div className="container mx-auto p-5 bg-search-background bg-cover bg-center bg-no-repeat lg:py-28">
-      <h1 className="font-semibold text-2xl text-primaryDarker text-center lg:text-[2.5rem]">
+      <motion.h1 
+        className="font-semibold text-2xl text-primaryDarker text-center lg:text-[2.5rem]"
+        variants={fadeIn('up', 0.2)}
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+      >
         Encontre sua próxima <span className="text-primary">viagem!</span>
-      </h1>
+      </motion.h1>
 
-      <div className="flex flex-col gap-4 mt-5 lg:flex-row lg:max-w-[948px] lg:mx-auto lg:p-4 lg:bg-primary lg:mt-12 lg:bg-opacity-20 lg:rounded-lg">
+      <motion.div 
+        className="flex flex-col gap-4 mt-5 lg:flex-row lg:max-w-[948px] lg:mx-auto lg:p-4 lg:bg-primary lg:mt-12 lg:bg-opacity-20 lg:rounded-lg"
+        variants={fadeIn('up', 0.2)}
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+      >
         <Input
           placeholder="Onde você quer ir?"
           error={!!errors.text}
@@ -74,7 +91,7 @@ const TripSearch = () => {
         <Button onClick={() => handleSubmit(onSubmit)()} className="lg:h-fit">
           Buscar
         </Button>
-      </div>
+      </motion.div>
     </div>
   );
 };

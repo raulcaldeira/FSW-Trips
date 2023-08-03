@@ -23,7 +23,7 @@ export default function RootLayout({
         <NextAuthProvider>
           <ToastProvider>
             <div className='flex flex-col h-screen'>
-              <div className='h-[94px'>
+              <div className='h-[94px] mb-[96px]'>
                 <Header />
               </div>
 
