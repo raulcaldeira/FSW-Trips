@@ -3,7 +3,7 @@
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
-import { differenceInDays } from "date-fns";
+import { add, differenceInDays } from "date-fns";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -129,7 +129,9 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
               placeholderText="Data Final"
               className="w-full"
               maxDate={tripEndDate}
-              minDate={startDate ?? tripStartDate}
+              // minDate={startDate ?? tripStartDate}
+              minDate={add(startDate!, {days: 1})}
+              disabled={!startDate}
             />
           )}
         />
