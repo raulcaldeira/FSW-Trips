@@ -4,8 +4,9 @@ import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
 import { add, differenceInDays } from "date-fns";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
@@ -23,6 +24,13 @@ interface TripReservationForm {
 }
 
 const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, pricePerDay }: TripReservationProps) => {
+
+  const [isCreatingCheckoutSession, setisCreatingCheckoutSession] = useState(false)
+
+  const {data} = useSession()
+
+  const session = data
+
   const {
     register,
     handleSubmit,
@@ -35,6 +43,13 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
   const router = useRouter();
 
   const onSubmit = async (data: TripReservationForm) => {
+
+    if(!session?.user){
+      return alert('Faça login para realizar uma reserva!')
+    }
+
+    setisCreatingCheckoutSession(true)
+
     const response = await fetch("/api/trips/check", {
       method: "POST",
       body: Buffer.from(
@@ -54,6 +69,8 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
         message: "Esta data já está reservada.",
       });
 
+      setisCreatingCheckoutSession(false)
+
       return setError("endDate", {
         type: "manual",
         message: "Esta data já está reservada.",
@@ -61,6 +78,9 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
     }
 
     if (res?.error?.code === "INVALID_START_DATE") {
+
+      setisCreatingCheckoutSession(false)
+
       return setError("startDate", {
         type: "manual",
         message: "Data inválida.",
@@ -68,6 +88,9 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
     }
 
     if (res?.error?.code === "INVALID_END_DATE") {
+
+      setisCreatingCheckoutSession(false)
+
       return setError("endDate", {
         type: "manual",
         message: "Data inválida.",
@@ -164,7 +187,7 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
       </div>
 
       <div className="pb-10 border-b border-b-grayLighter w-full lg:border-none lg:pb-0">
-        <Button onClick={() => handleSubmit(onSubmit)()} className="mt-3 w-full">
+        <Button onClick={() => handleSubmit(onSubmit)()} disabled={isCreatingCheckoutSession} className="mt-3 w-full">
           Reservar agora
         </Button>
       </div>
