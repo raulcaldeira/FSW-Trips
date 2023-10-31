@@ -106,7 +106,7 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
               selected={field.value}
               placeholderText="Data de Início"
               className="w-full"
-              minDate={tripStartDate}
+              minDate={new Date()}
             />
           )}
         />
@@ -153,6 +153,7 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
         error={!!errors?.guests}
         errorMessage={errors?.guests?.message}
         type="number"
+        max={maxGuests}
       />
 
       <div className="flex justify-between mt-3">
