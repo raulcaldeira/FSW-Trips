@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FSW-Trips
 
-## Getting Started
+O projeto FSW-Trips é um aplicativo de reserva de viagens que utiliza diversas tecnologias modernas, incluindo Next.js, NextAuth, Stripe, Tailwind CSS, Prisma e Supabase. Com ele, os usuários podem procurar, selecionar e reservar viagens emocionantes de forma conveniente. Esta aplicação integra autenticação segura, processamento de pagamentos, gerenciamento de dados e armazenamento de dados para criar uma experiência de reserva de viagens completa e eficaz.
 
-First, run the development server:
+## Principais Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Next.js:** Estrutura de desenvolvimento web que permite a criação de aplicativos React de servidor e cliente.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **NextAuth:** Biblioteca de autenticação que simplifica a implementação de autenticação em aplicativos Next.js.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Stripe:** Plataforma de pagamento que possibilita a integração de soluções de pagamento seguras.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Tailwind CSS:** Framework de CSS altamente personalizável para estilização eficiente de componentes.
 
-## Learn More
+- **Prisma:** ORM (Object-Relational Mapping) para facilitar o gerenciamento e consulta de banco de dados.
 
-To learn more about Next.js, take a look at the following resources:
+- **Supabase:** Plataforma de banco de dados como serviço (DBaaS) que simplifica o armazenamento e gerenciamento de dados.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Este projeto oferece uma experiência de usuário amigável e responsiva, juntamente com recursos essenciais para a reserva de viagens.
