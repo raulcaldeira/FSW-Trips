@@ -6,14 +6,16 @@ import Link from "next/link";
 import ReactCountryFlag from "react-country-flag";
 
 import { motion } from 'framer-motion'
+import { useRouter } from "next/router";
 
 interface TripitemProps {
     trip: Trip
 }
 
 const TripItem = ({trip}: TripitemProps) => {
+
     return(
-        <Link  className="h-full w-full md:max-w-[400px]" href={`trips/${trip.id}`}>
+        <Link  className="h-full w-full md:max-w-[400px]" href={`/trips/${trip.id}`}>
             <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
