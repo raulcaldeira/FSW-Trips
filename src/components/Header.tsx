@@ -34,7 +34,7 @@ const Header = () => {
             </Link>
 
             {status === "unauthenticated" && (
-                <button className="text-primary text-sm font-semibold" onClick={handleLoginClick}>Login</button>
+                <button className="text-primary text-sm font-semibold mr-1" onClick={handleLoginClick}>Login</button>
             )}
 
             {status === "authenticated" && data.user && (
